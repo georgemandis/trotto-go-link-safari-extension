@@ -7,11 +7,11 @@ I made this because Trotto doesn't seem to offer a Safari extension (boo).
 
 Features
 --------
-• Automatic redirect of any “http://go/keyword” or “https://go/keyword” URL
-• Intercepts Google or DuckDuckGo searches for “go/keyword” queries and redirects the tab
-• Works in Safari (with Manifest V3 support), Chrome, Firefox (cross-browser API)
-• Declarative net‐request rule for instant redirects on main‐frame loads
-• Fallback to webNavigation listener for search‐engine intercepts
+- Automatic redirect of any “http://go/keyword” or “https://go/keyword” URL
+- Intercepts Google or DuckDuckGo searches for “go/keyword” queries and redirects the tab
+- Works in Safari (with Manifest V3 support), Chrome, Firefox (cross-browser API)
+- Declarative net‐request rule for instant redirects on main‐frame loads
+- Fallback to webNavigation listener for search‐engine intercepts
 
 Quick Install in Safari (Add Temporary Extension)
 ------------------------------------------------
@@ -26,33 +26,33 @@ Quick Install in Safari (Add Temporary Extension)
 
 Usage
 -----
-• Type or click any URL like `http://go/my-doc` → automatically redirected to
+- Type or click any URL like `http://go/my-doc` → automatically redirected to
 `https://trot.to/my-doc`.
-• Perform a web search on Google or DuckDuckGo with query `go/my-doc` → page will push you to the same trot.to link.
+- Perform a web search on Google or DuckDuckGo with query `go/my-doc` → page will push you to the same trot.to link.
 
 How It Works
 ------------
 1. Manifest V3 declares:
- • permissions: `webNavigation`, `tabs`, `declarativeNetRequest`
- • host_permissions for `go/*`, `go./*`, Google, DuckDuckGo, trot.to
- • background.service_worker: `background.js`
- • rule_resources pointing to `rules.json`
+ - permissions: `webNavigation`, `tabs`, `declarativeNetRequest`
+ - host_permissions for `go/*`, `go./*`, Google, DuckDuckGo, trot.to
+ - background.service_worker: `background.js`
+ - rule_resources pointing to `rules.json`
 2. rules.json holds a single DNR rule:
- • regexFilter `^https?://go\.?/(.+)$`
- • redirects main_frame loads to `https://trot.to/$1`
+ - regexFilter `^https?://go\.?/(.+)$`
+ - redirects main_frame loads to `https://trot.to/$1`
 3. background.js service worker listens on `webNavigation.onBeforeNavigate`
- • For non‐go host searches (Google/DuckDuckGo), inspects the `q` or `query` parameter
- • If it matches `go/<keyword>`, calls `tabs.update` to redirect
+ - For non‐go host searches (Google/DuckDuckGo), inspects the `q` or `query` parameter
+ - If it matches `go/<keyword>`, calls `tabs.update` to redirect
 
 Cross-Browser Notes
 -------------------
-• Uses the `browser` namespace when available, otherwise falls back to `chrome`
-• In Chrome/Edge: load as an unpacked extension (chrome://extensions → “Load unpacked”)
-• In Firefox: `about:debugging` → “This Firefox” → “Load Temporary Add-on…”
+- Uses the `browser` namespace when available, otherwise falls back to `chrome`
+- In Chrome/Edge: load as an unpacked extension (chrome://extensions → “Load unpacked”)
+- In Firefox: `about:debugging` → “This Firefox” → “Load Temporary Add-on…”
 
 File Overview
 -------------
-• manifest.json — MV3 config, permissions, host rules
-• background.js — Service worker code (install, activate, webNavigation listener)
-• rules.json— declarativeNetRequest redirect rule resource
-• README.md — This file
+- manifest.json — MV3 config, permissions, host rules
+- background.js — Service worker code (install, activate, webNavigation listener)
+- rules.json— declarativeNetRequest redirect rule resource
+- README.md — This file
