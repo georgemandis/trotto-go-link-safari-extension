@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "regexSubstitution": "https://trot.to/\\1?s=crx&sc=https"
+      }
+    },
+    "condition": {
+      "regexFilter": "^https?://go\.?/(.+)$",
+      "resourceTypes": ["main_frame"]
+    }
+  }
+]

@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Go Link Redirector",
+  "version": "1.0.0",
+  "description": "Redirects go links (go/keyword) to trot.to with proper parameters",
+  
+  "permissions": [
+    "declarativeNetRequest",
+    "webNavigation",
+    "tabs"
+  ],
+
+  "icons": {
+    "96": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png",
+    "256": "icon.png",
+    "512": "icon.png"
+  },
+  
+  "host_permissions": [
+    "http://go/*",
+    "https://go/*",
+    "http://go./*",
+    "https://go./*",
+    "https://trot.to/*",
+    "https://www.google.com/*",
+    "https://duckduckgo.com/*"
+  ],
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "declarative_net_request": {
+    "rule_resources": [{
+      "id": "go_link_rules",
+      "enabled": true,
+      "path": "rules.json"
+    }]
+  },
+  
+  "action": {
+    "default_title": "Go Link Redirector"
+  }
+}
